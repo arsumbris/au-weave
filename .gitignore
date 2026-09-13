@@ -1,0 +1,4 @@
+.DS_Store
+operations/
+.arsumbris/*.sock
+.arsumbris/*.lock

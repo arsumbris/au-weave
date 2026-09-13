@@ -1,0 +1,9 @@
+#: The candidates mined from one source.
+#: Domains extend this type with one typed candidate list per kind they need.
+#: Keep extractions separate from knowledge nodes so unreviewed mentions do not count as held knowledge.
+abstract: true
+location:
+  fileType: yaml
+fields:
+  #: The source whose wording warrants these candidates. Recurrence counts distinct sources.
+  of: source::au-base-types*

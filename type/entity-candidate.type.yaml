@@ -1,0 +1,6 @@
+#: A mention a source treats as an entity, a named system, person, benchmark, dataset, or tool. Resolves to an `entity` node.
+extends: candidate
+fields:
+  #: The entity node matched to this mention. Check write diagnostics for kind mismatches.
+  #: Filled by weave, or by cut for an enrich candidate's fold target.
+  resolves_to?: entity*

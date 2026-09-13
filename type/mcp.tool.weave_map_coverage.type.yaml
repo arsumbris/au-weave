@@ -1,0 +1,15 @@
+#: Find woven nodes missing from this graph's maps, or list every woven node with its maps.
+extends: mcp.tool::au-mcp-sdk
+fields:
+  #: Declared name of the graph repository. Nodes and maps are scoped to this member.
+  repo: String
+  #: Include mapped nodes and their map paths. Defaults to false, returning only unmapped nodes.
+  include_mapped?: Boolean
+meta:
+  - type: plugin-runtime-meta::au-mcp-sdk
+    entry: ./scripts/weave-map-coverage.mjs
+    contractVersion: 0
+  - type: tool-presentation-meta::au-mcp-sdk
+    description: 'Check map placement after weaving or during tend. Supply repo; add include_mapped: true to list all woven nodes with their maps. Woven nodes are live resolution targets recorded in extraction candidate lists. Counts direct live body links from map::au-base-types and its subtypes in the same repo. Includes human-maintained maps. Returns checked and unmapped counts plus node/map paths; outside_repo lists resolution targets excluded by scope. Requires complete indexing and no error diagnostics in the graph repo. Coverage does not prove appropriate placement or reachability from home.'
+  - type: tool-access-meta::au-mcp-sdk
+    broker: read

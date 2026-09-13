@@ -1,0 +1,9 @@
+# Type dependencies used by au-weave's definitions and skills.
+# Runtime bundles are selected separately in workspace.yaml.
+type: au.engine.repo::au-engine
+name: au-weave
+description: the weave, the weaving layer of Ars Umbris. The generic moves and discipline that turn unstructured markdown into a maintained, typed, reasoned entity-web over au-base-types' kinds. Rides au-base-types (the base of kinds). Domains build implementations on top.
+deps:
+  - name: au-agent-guides   # guide types and shared authoring guidance
+  - name: au-base-types    # idea, thing, source and map types
+  - name: au-mcp-sdk       # mcp.skill definitions

@@ -1,0 +1,15 @@
+#: A defined term of the field, a concept, method, or definition. Never a truth-bearing proposition (that is `claim`),
+#: a concept pins a meaning, not a truth. Identity is the title, no aliases (aliases is entity-only).
+#: A woven node over au-base-types `idea`, its body DEFINES it by placing it among its neighbours.
+#: Define by PLACING: state what it is, then place it by contrast and relation, each placement a reasoned link
+#: in the sentence that says why. The placements ARE the definition. At the map altitude, from the sources, never the
+#: model's latent knowledge. Pitched at a reader who knows the field but not this source. The specific models, scores,
+#: and authors stay in the source. Thin (a one-line definition) to rich by maturity.
+#: FORMAT the body free-form, NO forced heading: clean whitespace-separated paragraphs for a short concept, `##`
+#: subheadings when it earns them. One blank line after the frontmatter, then one sentence per line, a blank line between idea-groups, plain, every word earning
+#: its place, screen-fit, the gist not a dump.
+#: Admission and distinction from claims follow [[hold-only-what-the-web-uses]].
+#: Support and tension follow [[the-argument-edge]].
+#: Default new nodes to `concepts/<concept name>.md` unless the consumer supplies another convention.
+#: Preserve existing node paths.
+extends: idea::au-base-types

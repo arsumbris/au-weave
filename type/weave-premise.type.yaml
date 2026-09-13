@@ -1,0 +1,15 @@
+#: The weave's premise, the north star worth is tested against. One per weave, OWNED by the weave
+#: (it lives in the graph repo, not the source corpus). Independent of any corpus's own premise, a
+#: research corpus's `premise` and the weave's `weave-premise` are different concepts and may diverge.
+#: Its body is an Intent and a CHECKABLE, explicit Out-of-scope, so a candidate can be TESTED against it.
+#: Names the profile the weave mines with (optional, a concrete `extraction` subtype like `research-extraction`).
+#: Discovered by instances_of(weave-premise), so the weave never guesses where the premise lives. Standalone,
+#: never a graph node (thing / idea), so it never pollutes the node space the backlog and worth queries read.
+fields:
+  #: the profile this weave mines with, a concrete `extraction` subtype. optional.
+  profile?: type<extraction>*
+body:
+  - section: Intent
+    guidance: what this weave's graph is about, the purpose that determines which candidates earn nodes. one dense paragraph. what is IN scope is implied here, any candidate that serves this intent is admissible.
+  - section: Out-of-scope
+    guidance: an EXPLICIT, testable list (bullets, not a paragraph), each line a KIND of candidate that does NOT earn a node here, so the weave can check a candidate against it, not just weigh it against prose.

@@ -1,0 +1,14 @@
+#: An overview, an ORIENTATION SLICE, the front door to a cluster or domain, a reader's or agent's way in.
+#: A woven-graph map over au-base-types `map`. A map is a SLICE woven INTO the graph, a cut along an axis, not a
+#: layer above the notes. The overview's axis is ORIENTATION, its body orients a region and points onward, each
+#: pointer a reasoned link with its one-line reason (start here; open this when X; this corner is still thin).
+#: A slice with reasons, NOT an argument along one axis (that is `map.synthesis`). Where a reader or agent starts,
+#: and how a topic is structured as the graph goes deeper. A live query belongs here by reference, never copied.
+#: FORMAT the body free-form, NO forced heading: a one-line orientation, then `##` subheadings for the groups.
+#: A front door leads with spacious block-links, a link in bold on its own line with its point below;
+#: a dense region uses one link and its reason per line. Never a bare title, always the reason why.
+#: NO counts or calculated numbers, they go stale; a live truth is referenced as a query, never copied in.
+#: One blank line after the frontmatter, plain, built to be SCANNED, a place that is a pleasure to open.
+#: The map judgment (a map is a slice, say why the notes belong, render honestly, rework a stale map) rides the
+#: shared map guide in au-agent-guides, not here. The example bundle's overview preset; a domain may add its own.
+extends: map::au-base-types

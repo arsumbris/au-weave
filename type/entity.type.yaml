@@ -1,0 +1,16 @@
+#: A named thing the field points at, a system, person, benchmark, dataset, or tool.
+#: A woven-graph node over au-base-types `thing`, its value relational (what references it).
+#: Identity is the title + aliases; the body is the neutral placed description, free of truth-claims
+#: (those are `claim` nodes). A thin stub (a title + aliases + a tldr) is a legitimate state, it grows as
+#: sources recur. Even a stub places its one HOME edge, a reasoned link to the pattern, field, or work
+#: it belongs to, whenever that node already exists, so the hub it names gets its backlink and the stub is
+#: never a pure orphan. Only when no such target exists yet does it stand edgeless, to gain a link as one arrives.
+#: The body PLACES it: what it is and where it sits in the field, neutral and relational, each placement a
+#: reasoned link in the sentence that says why. NEUTRAL, no truth-claims (those are `claim` nodes). The
+#: tldr is the one-line placed gloss, the body the fuller placement when it earns one.
+#: FORMAT the body free-form, NO forced heading: clean whitespace-separated paragraphs for a short entity, `##`
+#: subheadings when it earns them. One blank line after the frontmatter, then one sentence per line, plain and
+#: tight, screen-fit, the gist not a dump.
+#: Default new nodes to `entities/<entity name>.md` unless the consumer supplies another convention.
+#: Preserve existing node paths.
+extends: thing::au-base-types

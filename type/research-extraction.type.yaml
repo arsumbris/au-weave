@@ -1,0 +1,13 @@
+#: au-weave's shipped example profile, the research/evergreen mining template.
+#: Mines a source for the field's concepts, claims, and entities, each a typed candidate held in frontmatter.
+#: A source needn't name all three kinds. The mining discipline (mine liberally within the kind, only what the
+#: source carries, tier salience, a one-line own-words note) lives in the `candidate` types these fields hold.
+#: A domain that needs other targets rides its own `extraction` subtype, it never edits this.
+extends: extraction
+fields:
+  #: the concepts this source names, defined terms / methods / definitions, each a concept-candidate.
+  concepts?: concept-candidate&[]
+  #: the propositions this source asserts, each a claim-candidate (keep the source's own hedge in the note).
+  claims?: claim-candidate&[]
+  #: the named systems / people / benchmarks / datasets / tools this source names, each an entity-candidate.
+  entities?: entity-candidate&[]

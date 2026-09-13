@@ -1,0 +1,6 @@
+#: A mention a source treats as a claim, a proposition the source asserts. Resolves to a `claim` node.
+extends: candidate
+fields:
+  #: The claim node matched to this mention. Check write diagnostics for kind mismatches.
+  #: Filled by weave, or by cut for an enrich candidate's fold target.
+  resolves_to?: claim*

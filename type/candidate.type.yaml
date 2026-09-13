@@ -1,0 +1,34 @@
+#: A mention mined from one source, before it earns a node.
+#: Keep only what that source says and preserve its qualifications.
+#: Domains extend this type with a kind-specific resolves_to reference.
+abstract: true
+fields:
+  #: One line in own words: how the source treats the mention, its sense and a relation it implies.
+  note: String
+  #: The cut's judgment against the premise and existing graph.
+  #: Use weave for a new node or bare reuse, enrich for a facet to fold into a named target,
+  #: parked for an unresolved judgment and dropped for a rejection with a reason.
+  #: For enrich, also fill the subtype's resolves_to field with the fold target.
+  verdict?: [weave, enrich, parked, dropped]
+  #: One line naming the gap, reuse, facet, uncertainty or rejection reason.
+  why?: String
+  #: the source's own name(s) for this mention, verbatim. the first is the primary, the group key the
+  #: recurrence tally normalizes and resolution compares. any others are this source's aliases for the same
+  #: referent, a resolution seed. strings, not links, so a mention never dangles and never force-merges a homonym.
+  surface: String[+]
+  #: how central this mention is to THIS source, read from how the text foregrounds it (mention count, first
+  #: position, heading vs body), never world-importance. the per-source warrant the weave sums over sources.
+  salience: [focal, supporting, mentioned]
+  #: Source blocks that warrant this candidate's interpretation, checked during weave or an enrichment fold.
+  #: Write as an indented YAML list under passages, one quoted link per dash, rather than a flow-style array.
+  #: Use single-caret live links into the extraction's own source, qualified when crossing repos.
+  #: Reuse an existing anchor or assign one through the engine, then follow it from the extraction's origin.
+  #: Check the addressed text, its source identity and relevant diagnostics, including missing-anchor warnings.
+  #: Keep every passage needed for the source's qualification and omit duplicate links to the same block.
+  #: Save before resolving a weave candidate or marking an enrichment folded. Presence alone is not completion.
+  #: Absent on newly mined candidates and historical extractions. Never backfill without reading the evidence.
+  passages?: source::au-base-types*[+]
+  #: set by reweave once it has folded an enrich candidate's facet into the target node (the node named in
+  #: resolves_to). absent means the fold is pending, the drain signal for the enrich-worklist (verdict enrich,
+  #: folded absent). only meaningful on an enrich candidate, never write false, when-folded lives in git.
+  folded?: Boolean
