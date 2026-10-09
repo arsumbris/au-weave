@@ -137,8 +137,12 @@ export function createPlugin(ctx) {
             for (const container of group.containers) {
               const value = container.value
               if (value.kind === 'inline_record') {
-                const target = value.value.resolves_to
-                if (target == null) continue // Mining and pending weave candidates have no node yet.
+                // The target itself comes from references_out in addResolution.
+                // Older engines served `value: { resolves_to }` instead of `fields`.
+                const filled = value.fields
+                  ? value.fields.some(f => f.field === 'resolves_to' && f.values.length > 0)
+                  : value.value?.resolves_to != null
+                if (!filled) continue // Mining and pending weave candidates have no node yet.
                 const spans = container.contributions.map(item => item.location.byte_range)
                 await addResolution(extraction.path, spans, true)
               } else if (value.kind === 'reference') {

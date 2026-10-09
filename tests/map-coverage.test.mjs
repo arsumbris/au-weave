@@ -11,9 +11,17 @@ const identity = (name, repo) => ({ name, repo, hash: `${repo}/${name}` })
 const candidate = identity('candidate', 'au-weave')
 const shape = { kind: 'list', inner: { kind: 'inline-or-reference', name: 'finding-candidate' } }
 
-function inline(target, start) {
+// Served shape: au-engine/crates/au-engine/src/wire.rs:731 (InlineRecord { fields }), as in au-cli snapshots.
+function reference(target) {
+  const [name, repo] = target.slice(2, -2).split('::')
+  return { kind: 'reference', target: name, anchor: null, block_id: null, ...(repo ? { repo } : {}) }
+}
+function inline(target, start, fields = []) {
   return {
-    value: { kind: 'inline_record', value: { resolves_to: target } },
+    value: {
+      kind: 'inline_record',
+      fields: [...fields, ...(target == null ? [] : [{ field: 'resolves_to', values: [reference(target)] }])],
+    },
     contributions: [{ location: { byte_range: { start, end: start + 90 } } }],
   }
 }
@@ -106,6 +114,29 @@ test('defaults to unmapped nodes; all view includes distinct maps and deduplicat
   const all = await f.plugin.invoke({ repo: 'graph', include_mapped: true })
   assert.deepEqual(all.content.nodes, [{ node: a, maps: [anotherMap, map].sort() }, { node: b, maps: [] }])
   assert.equal(f.calls.filter(([op, args]) => op === 'references_out' && args.path === extraction).length, 2)
+})
+
+test('inline records are read through their served fields, not the former value mapping', async () => {
+  const f = fixture()
+  const label = { field: 'label', values: [{ kind: 'scalar', value: 'pending' }] }
+  f.rows[0].instance.effective_values[0].containers.push(inline(null, 410, [label]))
+  assert.equal((await f.plugin.invoke({ repo: 'graph' })).content.checked, 2)
+  // A filled resolves_to among other fields must require its recorded resolution.
+  f.rows[0].instance.effective_values[0].containers.push(inline('[[C]]', 510, [label]))
+  assert.equal((await f.plugin.invoke({ repo: 'graph' })).isError, true)
+})
+
+test('inline records in the former value mapping are still read', async () => {
+  const f = fixture()
+  const legacy = (target, start) => ({
+    value: { kind: 'inline_record', value: { resolves_to: target } },
+    contributions: [{ location: { byte_range: { start, end: start + 90 } } }],
+  })
+  f.rows[0].instance.effective_values[0].containers.push(legacy(null, 410))
+  assert.equal((await f.plugin.invoke({ repo: 'graph' })).content.checked, 2)
+  // A filled legacy resolves_to must not be skipped as if pending.
+  f.rows[0].instance.effective_values[0].containers.push(legacy('[[C]]', 510))
+  assert.equal((await f.plugin.invoke({ repo: 'graph' })).isError, true)
 })
 
 test('metadata, historical pins, block values and maps in other repos do not cover a node', async () => {
